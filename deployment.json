@@ -1,0 +1,57 @@
+{
+  "resource": {
+    "name": "${name}-${random1}-${random2}-${random3}-a",
+    "namespace": "${namespace}",
+    "displayName": ""
+  },
+  "kubernetes": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "${name}-${random1}-${random2}-${random3}-a",
+        "labels": {
+          "app": "${name}-${random1}-${random2}-${random3}-a"
+        },
+        "namespace": "${namespace}"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "${name}-${random1}-${random2}-${random3}-a"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "${name}-${random1}-${random2}-${random3}-a"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "${name}-${random1}-${random2}-${random3}-a",
+                "image": "${image}",
+                "ports": [
+                  {
+                    "containerPort": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "20M"
+                  }
+                }
+              }
+            ],
+            "nodeSelector": {
+              "ip": "${index}"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
